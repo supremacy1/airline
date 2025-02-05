@@ -1,0 +1,131 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>SkyFly Airlines - Flight Booking</h1>
+    </header>
+    
+    <section id="search-flights">
+        <h2>Search for Flights</h2>
+        <form id="search-form" action="search_flights.php" method="POST">
+            <label for="from">From:</label>
+            <input type="text" id="from" name="from" required>
+            
+            <label for="to">To:</label>
+            <input type="text" id="to" name="to" required>
+            
+            <label for="date">Travel Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <button type="submit">Search Flights</button>
+        </form>
+    </section>
+    
+    <section id="book-flight">
+        <h2>Book Your Flight</h2>
+        <form id="booking-form" action="book_flight.php" method="POST">
+            <label for="flight">Select Flight:</label>
+            <select id="flight" name="flight" required>
+                <option value="">Select a flight</option>
+            </select>
+            
+            <label for="name">Passenger Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <button type="submit">Book Now</button>
+        </form>
+        <p id="tracking-id"></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 SkyFly Airlines. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchForm = document.getElementById("search-form");
+            const bookingForm = document.getElementById("booking-form");
+            const flightSelect = document.getElementById("flight");
+            const trackingIdDisplay = document.getElementById("tracking-id");
+            
+            searchForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const response = await fetch("search_flights.php", {
+                    method: "POST",
+                    body: formData
+                });
+                const flights = await response.json();
+                
+                flightSelect.innerHTML = "<option value=''>Select a flight</option>";
+                flights.forEach(flight => {
+                    const option = document.createElement("option");
+                    option.value = flight.flight_number;
+                    option.textContent = `${flight.flight_number} - $${flight.price}`;
+                    flightSelect.appendChild(option);
+                });
+            });
+            
+            bookingForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(bookingForm);
+                const response = await fetch("book_flight.php", {
+                    method: "POST",
+                    body: formData
+                });
+                const result = await response.text();
+                trackingIdDisplay.textContent = result;
+            });
+        });
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 15px 0;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: 50px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 600px) {
+            section {
+                width: 90%;
+            }
+        }
+    </style>
+</body>
+</html>

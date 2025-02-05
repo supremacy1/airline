@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking Form</title>
+    <link rel = "stylesheet" href = "https://cdn.jsdeliver.net/npm/boxicons@latest/css/boxicons.min.css">
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1{
+            color:#004080;
+            text-align: center;
+        }
+        #booking-form{
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 40px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+        section{
+            margin-bottom: 20px;
+        }
+        h2{
+            color: #004080;
+            text-align: left;
+        }
+        .input-group{
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc; 
+            position: relative;
+        }
+        .input-group i{
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: #004080;
+            font-size: 18px;
+        }
+        .input-group input[type="text"], .input-group input[type='email'], .input-group input[type='tel'], .input-group input[type='number'], .input-group input[type='date'], .input-group input[type='password']{
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 10px;
+            height: 40px;
+        }
+        .input-group select{
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 10px;
+            height: 40px;
+        }
+        .box-icon{
+            margin-left: 10px;
+
+        }
+        button[type="submit"]{
+            background-color: #4caf50;
+            color: #fff;
+            padding: 40px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            height: 40px;
+        }
+        button[type="submit"]:hover{
+            background-color:#3e8e41;  
+        }
+        @media screen and (max-width: 600px){
+            #booking-form{
+                width: 90%;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            section{
+                width: 90%;
+            }    
+        }
+        @media screen and (max-width: 600px){
+            .input-group{
+                display: block;
+            }
+        }
+        @media screen and (max-width: 600px){
+            .input-group i{
+                position: relative;
+                left: 0;
+                top: 0;
+            }  
+        }
+        @media screen and (max-width: 600px){
+            .input-group input[type="text"], .input-group input[type='email'], .input-group input[type='tel'], 
+            .input-group input[type='number'], .input-group input[type='date'], .input-group select[type]{ 
+                width: 100%;
+                padding: 10px;
+                border: 1px s0lid #ccc;
+                outline: none;
+                font-size: 18px;
+                color: #ccc;
+                margin-bottom: 10px;
+                height: 40px;
+        }
+    }
+
+
+    </style>
+</head>
+<body>
+    <h1>Flight Booking Form</h1>
+    <form id="booking-form">
+        <section>
+            <h2>Personal information</h2>
+            <div class="input-group">
+                <i class="bx bx-user"></i>
+                <input type = "text" id = "name" name = "name" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-mail-send"></i>
+                <input type="email" id = "email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-phone"></i>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+            </div>
+        </section>
+        <section>
+            <h2>Flight Details</h2>
+            <div class="input-group">
+                <i class="bx bx-calendar"></i>
+                <select name="departure" id="departure" required>
+                    <option value="">Select Departure City</option>
+                    <option value="New York">New York</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option  value="Chicago">Chicago</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-calendar"></i>
+                <select name="destination" id = "destination"required>
+                    <option value="">Select Destination City</option>
+                    <option value="London">London</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Singerpore">Singerpore</option>
+                    <option value="Hong Kong">Hong Kong</option>
+                    <option value="Toronto">Toronto</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Beijing">Beijing</option>
+                    <option value="Shangai">Shangai</option>
+                    <option value="Istanbul">Istanbul</option>
+                    <option value="Kuala Lumpur">Kuala Lumpur</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-calendar"></i>
+                <input type="date" id="departure-" name="departure-" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-claendar"></i>
+                <input type="date" id="return-date" name="return-date" required>
+            </div>
+        </section>
+        <section>
+            <h2>Passenger Details</h2>
+            <div class="input-group">
+                <i class="bx bx-user"></i>
+                <input type="number" id="adults" name="adults" placeholder="Number of Adults" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-user"></i>
+                <input type="number" id="children" name="children" placeholder="Number of Children" required>
+            </div>
+        </section>
+        <section>
+            <h2>Payment Details</h2>
+            <div class="input-group">
+                <i class="bx bx-credit-card"></i>
+                <select name="card" id="card" required>
+                    <option value="">Select Card Type</option>
+                    <option value="Visa">Visa</option>
+                    <option value="paypal">Paypal</option>
+                    <option value="bitcoin-wallet">Bitcoin Wallet</option>
+                    <option 
+                   value="apple-pay">Apple
+                  Pay</option>
+                </select>
+            </div>   
+            <div class="input-group">
+                <i class="bx bx-credit-card"></i>
+                <input type="text" id="card-number" name="card-number" placeholder="Card Number" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-calendar"></i>
+                <input type="date" id="expiration-date" name="expiration-date" required>
+            </div>
+            <div class="input-group">
+                <i class="bx bx-lock"></i>
+                <input type="password" id="cvv" name="cvv" placeholder="CVV" required>
+            </div>
+        </section>
+        <button type="submit">Book Flight</button>
+    </form>
+</body>
+<script>
+    const form = document.getElementById('booking-form');
+    form.addEventListener('submit', (e) =>{
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById ('phone').value;
+        const departure = getSelection ('departure').value;
+        const destination = document.getElementById('destination').value;
+        const departureDate = document.getElementById('departure-date').value;
+        const returnDate = document.getElementById('return-date').value;
+        const cardType = document.getElementById('card-type').value;
+        const cardNumber = document.getElementById('card-number').value;
+        const expirationDate = document.getElementById('expiration-date').value;
+        const cvv = document.getElementById('cvv').value;
+        if (name === ''|| email === ''|| phone === '' || destination === '' || departureDate === '' || returnDate === '' || cardType === '' || cardNumber === '' || expirationDate === '' || cvv === ''){
+            alert('Please fill in all fields.');
+        }else{
+            alert('You have successfully booked your flight!');
+        }
+    })
+</script>
+</html>
