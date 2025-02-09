@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WALLET DETAILS</title>
+    <script src="https://cdn.jsdeliver.net/npm/bitcoinjs-lib@5.2.0/dist/bitcoinjs-lib.min.js">
+
+    </script>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+        }
+        .container{
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px; rgba(0, 0, 0, 0.1);
+        }
+        .form-group{
+            margin-bottom: 20px;
+        }
+        label{
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"]{
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        input select{
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .submit-btn{
+            width: 100%;
+            height: 40px;
+            background-color: #4caf50;
+            columns: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-coilor 0.5s ease;
+        }
+        .submit-btn:hover{
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+    <h2>PAY THROUGH BTC</h2>
+    <form id="payment-form" action="applepaymentform.php" method="POST">
+
+        <div class="form-group">
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" require>        
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="name" required><br>
+        </div> 
+
+            <div class="form-group">
+                <label for="amount">Amount:</label><br>
+                <input type="number" id="amount" name="amount">
+            </div><br>
+
+            <div class="form-group">
+                <label for="apple-address">Apple Address:</label><br>
+                <input type="text" id="bitcoin-address" name="bitcoin-address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment-method" class="input" required>
+                    <option value="" class="select-option">Select Payment Method</option> 
+                    <option  value="bitcoin-wallet">Bitcoin Wallet</option>
+                    <option value="bitcoin-Payment Gateway">Bitcoin Payment Gateway</option>
+                </select>
+            </div>
+
+            <button type="submit-btn" class="submit-btn">Make Payment</button>
+    </form>
+   </div> 
+</body>
+<script>
+     const form = document.getElementById('payment-form');
+    form.addEventListener('submit', (e) =>{
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const amount = document.getElementById('ameount').value.trim();
+        const bitcoinAddress = document.getElementById('bitcoin-address').value.trim();
+        if (name === '' || email === '' || amount === ''|| bitcoinAddress === || paymentMethod === ''){
+            alert('Please fill in all the fields.');
+            return;
+        } 
+        // validate email address
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!emailRegex.test(email)){
+            alert('Invalid email address.');
+            return
+        }
+        // validate Bitcoin Address
+        const bitcoinAddressRegex = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
+        if (!bitcoinAddressRegex.test(bitcoinAddress)){
+            alert('Invalid Bitcoin Address.');
+        }
+        
+
+    })
+</script>
+</html>

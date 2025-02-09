@@ -84,6 +84,49 @@
         button[type="submit"]:hover{
             background-color:#3e8e41;  
         }
+        .dropdown{
+            position:relative;
+            display: inline-block;
+        }
+        .dropbtn{
+            color:black;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 400px;
+            height: 50px;
+            padding: 16px 32px;
+            border-radius: 5px;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+            opacity: 1;
+        }
+        .dropdown:hover{
+            background-color: #3e8e41;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            transition: opacity 0.5s;
+
+        }
+         .dropdown-content a:hover{
+            background-color: #3367cf;
+        }
+        .dropdown-content a{
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: black;
+        }
+        .dropdown:hover .dropbtn{
+            background-color: #3e8e41;
+        }
         @media screen and (max-width: 600px){
             #booking-form{
                 width: 90%;
@@ -193,16 +236,14 @@
         </section>
         <section>
             <h2>Payment Details</h2>
-            <div class="input-group">
-                <i class="bx bx-credit-card"></i>
-                <select name="card" id="card" required>
-                    <option value="">Select Card Type</option>
-                    <option value="Visa">Visa</option>
-                    <option value="paypal">Paypal</option>
-                    <option value="bitcoin-wallet">Bitcoin Wallet</option>
-                    <option 
-                   value="apple-pay">Apple
-                  Pay</option>
+            <div class="dropdown" id="input-group">
+                <button class="dropbtn">Select your Prefer Method of Payment</button>
+                
+                <div class="dropdown-content">
+                    <a href="btcuserinformationform.html">Bitcoin Wallet</a>
+                    <a href="paypalpaymentform.html">Paypal Account</a>
+                    <a href="applepaymentform.html">Apple Account</a>
+                </div>
                 </select>
             </div>   
             <div class="input-group">
