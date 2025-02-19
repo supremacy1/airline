@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet" href="styles.css"> -->
         <link rel="stylesheet" href="slideshow.css">
 
-    <script src="script.js" defer></script>
+
 </head>
 <body>
     <header>

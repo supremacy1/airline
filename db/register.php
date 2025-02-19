@@ -1,10 +1,14 @@
 <?php
 session_start();
 require_once "db.php";
-require 'vendor/autoload.php'; // Include PHPMailer
+require '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+header("Content-Type: application/json"); // Ensure JSON response
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $company_name = $_POST["company_name"];
@@ -27,58 +31,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // If passwords don't match, return an error (but don't redirect)
+    // Check password match
     if ($password !== $confirm_password) {
         echo json_encode(["status" => "error", "message" => "Passwords do not match!", "redirect" => false]);
         exit();
     }
 
-    // Hash password after validation
+    // Hash password
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insert new airline company
+    // Insert into database
     $stmt = $pdo->prepare("INSERT INTO airline_companies (company_name, iata_code, icao_code, contact_person, email, phone, country, language, password) 
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
     if ($stmt->execute([$company_name, $iata_code, $icao_code, $contact_person, $email, $phone, $country, $language, $hashed_password])) {
         
-        // Send welcome email
+        // Send welcome email using PHPMailer
         $mail = new PHPMailer(true);
         try {
-            // SMTP configuration
+            // SMTP Configuration
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+            $mail->Host = 'debysfoundation.org.ng'; 
             $mail->SMTPAuth = true;
-            $mail->Username = 'debysfoundation@gmail.com'; // Replace with your email
-            $mail->Password = 'fmtg jqrk hvot qabt'; // Replace with your email password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587; 
+            $mail->Username = 'support@debysfoundation.org.ng'; 
+            $mail->Password = 'andybestdigita@1'; 
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Fix encryption method
+            $mail->Port = 465;
 
-            // Email settings
-            $mail->setFrom('debysfoundation@gmail.com', 'Your Company');
+            // Recipients
+            $mail->setFrom('no-reply@debysfoundation.org.ng', 'Airline Company');
             $mail->addAddress($email, $contact_person);
-            $mail->Subject = "Welcome to Our Airline Platform!";
-            $mail->isHTML(true);
-            $mail->Body = "
-                <h2>Welcome, $contact_person!</h2>
-                <p>Thank you for registering your airline company, <strong>$company_name</strong>. We're excited to have you on board!</p>
-                <p>Here are your details:</p>
-                <ul>
-                    <li><strong>Company Name:</strong> $company_name</li>
-                    <li><strong>IATA Code:</strong> $iata_code</li>
-                    <li><strong>ICAO Code:</strong> $icao_code</li>
-                    <li><strong>Contact Email:</strong> $email</li>
-                </ul>
-                <p>If you have any questions, feel free to contact our support team.</p>
-                <p>Best Regards,<br>Your Company</p>
-            ";
+
+            // Email Content
+            $mail->isHTML(false);
+            $mail->Subject = "Welcome to Our Airline Company!";
+            $mail->Body = "Dear $contact_person,\n\nThank you for registering with us. We are excited to have you on board!\n\nBest regards,\nThe Airline Team";
 
             $mail->send();
+
         } catch (Exception $e) {
-            // Log error (do not expose details to the user)
-            error_log("Email sending failed: " . $mail->ErrorInfo);
+            // Log error but continue registration
+            error_log("Mailer Error: " . $mail->ErrorInfo);
         }
 
-        echo json_encode(["status" => "success", "message" => "Registration Successful! A welcome email has been sent.", "redirect" => true]);
+        echo json_encode(["status" => "success", "message" => "Registration Successful!", "redirect" => true]);
     } else {
         echo json_encode(["status" => "error", "message" => "Registration failed. Try again.", "redirect" => false]);
     }

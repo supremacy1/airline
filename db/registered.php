@@ -38,15 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'smtp.example.com'; // Your SMTP server
+            $mail->Host = 'debysfoundation.org.ng'; // Your SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'your-email@example.com'; // SMTP username
-            $mail->Password = 'your-email-password'; // SMTP password
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->Username = 'support@debysfoundation.org.ng'; // SMTP username
+            $mail->Password = 'andybestdigita@1'; // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STMPS;
+            $mail->Port = 465;
 
             // Recipients
-            $mail->setFrom('no-reply@airlinecompany.com', 'Airline Company');
+            $mail->setFrom('no-reply@debysfoundation.org.ng', 'Airline Company');
             $mail->addAddress($email, $contact_person);
 
             // Content
@@ -69,10 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-//origina
 <?php
 session_start();
 require_once "db.php";
+require '../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $company_name = $_POST["company_name"];
@@ -108,6 +111,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $pdo->prepare("INSERT INTO airline_companies (company_name, iata_code, icao_code, contact_person, email, phone, country, language, password) 
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt->execute([$company_name, $iata_code, $icao_code, $contact_person, $email, $phone, $country, $language, $hashed_password])) {
+ // Send welcome email using PHPMailer
+ $mail = new PHPMailer(true);
+ try {
+     // Server settings
+     $mail->isSMTP();
+     $mail->Host = 'debysfoundation.org.ng'; // Your SMTP server
+     $mail->SMTPAuth = true;
+     $mail->Username = 'support@debysfoundation.org.ng'; // SMTP username
+     $mail->Password = 'andybestdigita@1'; // SMTP password
+     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STMPS;
+     $mail->Port = 465;
+
+     // Recipients
+     $mail->setFrom('no-reply@debysfoundation.org.ng', 'Airline Company');
+     $mail->addAddress($email, $contact_person);
+
+     // Content
+     $mail->isHTML(false);
+     $mail->Subject = "Welcome to Our Airline Company!";
+     $mail->Body = "Dear $contact_person,\n\nThank you for registering with us. We are excited to have you on board!\n\nBest regards,\nThe Airline Team";
+
+         $mail->send();
+     } catch (Exception $e) {
+         echo json_encode(["status" => "error", "message" => "Email could not be sent. Mailer Error: {$mail->ErrorInfo}", "redirect" => false]);
+     }
+
         echo json_encode(["status" => "success", "message" => "Registration Successful!", "redirect" => true]);
     } else {
         echo json_encode(["status" => "error", "message" => "Registration failed. Try again.", "redirect" => false]);
