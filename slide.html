@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <link rel="stylesheet" href="slideshow.css">
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slide active" style="background-image: url('./images/im1.jpg');">
+            <div class="overlay"></div>
+            <div class="text-content">Discover Amazing Destinations</div>
+        </div>
+        <div class="slide" style="background-image: url('./images/im2.jpg');">
+            <div class="overlay"></div>
+            <div class="text-content">Experience Luxury Travel</div>
+        </div>
+        <div class="slide" style="background-image: url('./images/im3.jpg');">
+            <div class="overlay"></div>
+            <div class="text-content">Adventure Awaits You</div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>

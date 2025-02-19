@@ -1,0 +1,184 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="reste.php">
+        <input type="text" name="name" placeholder="name" required>
+        <input type="text" name="email" placeholder="email" required>
+        <input type="text" name="subject" placeholder="subject" required>
+        <textarea  name="message" placeholder="message" required></textarea>
+    <button>send</button>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Company Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        }
+        .button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .close-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Airline Company Registration</h2>
+        <form id="registrationForm" action="./db/register.php" method="POST">
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name" required>
+
+            <label for="iata_code">IATA Code:</label>
+            <input type="text" id="iata_code" name="iata_code" required>
+
+            <label for="icao_code">ICAO Code:</label>
+            <input type="text" id="icao_code" name="icao_code" required>
+
+            <label for="contact_person">Contact Person:</label>
+            <input type="text" id="contact_person" name="contact_person" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <button type="submit" class="button">Register</button>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <button class="close-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            document.getElementById("messageModal").style.display = "none";
+            // Redirect to the appropriate page
+            window.location.href = "<?php echo isset($_SESSION['redirect']) ? $_SESSION['redirect'] : 'registration.html'; ?>";
+        }
+
+        // Display modal if there's a message from PHP
+        <?php if (isset($_SESSION['message'])): ?>
+            document.getElementById("modalMessage").textContent = "<?php echo $_SESSION['message']; ?>";
+            document.getElementById("messageModal").style.display = "block";
+            <?php unset($_SESSION['message']); // Clear the message after displaying ?>
+        <?php endif; ?>
+    </script>
+</body>
+</html>
