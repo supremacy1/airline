@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Email Content
             $mail->isHTML(false);
             $mail->Subject = "Welcome to Our Airline Company!";
-            $mail->Body = "Dear $contact_person,\n\nThank you for registering with us. We are excited to have you on board!\n\nBest regards,\nThe Airline Team";
+            $mail->Body = "Dear $contact_person,\n\nThank you for registering with us. We are excited to have you on board!!\n\nBest regards,\nThe Airline Team";
 
             $mail->send();
 
