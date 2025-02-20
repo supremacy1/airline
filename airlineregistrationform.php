@@ -77,6 +77,8 @@
  </head>
  <body>
      <div class="container">
+        
+            <?php include 'header.php'; ?>
          <h2>Airline Company Registration</h2>
          <form id="registrationForm" action="./db/register.php" method="POST">
              <label for="company_name">Company Name:</label>
@@ -196,7 +198,7 @@
         document.getElementById("modalButton").onclick = function () {
             document.getElementById("messageModal").style.display = "none";
             if (data.redirect) {
-                window.location.href = "bookingflight.html";
+                window.location.href = "bookingflight.php";
             }
         };
     })

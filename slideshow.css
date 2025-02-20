@@ -59,20 +59,20 @@
     padding: 0;
     text-align: center;
 }
-header {
+/* header {
     background-color: #004080;
     color: white;
     padding: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.logo img {
+} */
+/* .logo img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-}
-nav ul {
+} */
+/* nav ul {
     list-style: none;
     padding: 0;
 }
@@ -87,7 +87,7 @@ nav ul li a {
 nav ul li a:hover {
     background-color: green;
     cursor: pointer;
-}
+} */
 #introduction{
     background-color: #004080;
     padding: 10px;
@@ -180,7 +180,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     header {
         flex-direction: column;
         text-align: center;
@@ -196,4 +196,4 @@ footer {
     .slide {
         width: 100%;
     }
-}
+} */

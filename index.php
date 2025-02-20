@@ -11,18 +11,19 @@
 </head>
 <body>
     <header>
-        <div class="logo">
+        <!-- <div class="logo">
             <img src="logo.png" alt="SkyFly Airlines Logo" class="logo-img">
         </div>
         <h1>Welcome to SkyFly Airlines</h1>
-        <!-- fmtg jqrk hvot qabt -->
+     
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="mailto:travelairlines210america@gmail.com">Contact Us</a></li>
             </ul>
-        </nav>
+        </nav> -->
+        <?php include 'header.php'; ?>
     </header>
     
     
@@ -60,7 +61,7 @@
     
     <section id="booking">
         <h2>Book Your Flight</h2>
-        <a href="airlineregistrationform.html" 
+        <a href="airlineregistrationform.php" 
 class="button" type="submit">Book Now!</a>
         </form>
     </section>

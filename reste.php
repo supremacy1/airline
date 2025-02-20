@@ -20,15 +20,15 @@ try {
     $mail->isSMTP();
     $mail->SMTPAuth = true;
     
-    $mail->Host = "smtp.gmail.com";
+    $mail->Host = "debysfoundation.org.ng";
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     $mail->Username = "debysfoundation@gmail.com";
-    $mail->Password = "fmtg jqrk hvot qabt"; // WARNING: Do not expose credentials in public code!
+    $mail->Password = "andybestdigita@1"; // WARNING: Do not expose credentials in public code!
 
     $mail->setFrom($email, $name);
-    $mail->addAddress("andrewohejiedogbu@gmail.com", "Andrew Ohejie");
+    $mail->addAddress("debysfoundation@gmail.com", "Andrew Ohejie");
 
     $mail->Subject = $subject;
     $mail->Body = $message;
