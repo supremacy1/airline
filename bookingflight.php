@@ -17,13 +17,18 @@ form {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(14, 7, 112, 0.1);
 }
 
 input, select, button {
     display: block;
     width: 100%;
     margin-bottom: 10px;
-    padding: 8px;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(24, 8, 252, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 button {
@@ -51,20 +56,25 @@ button:hover {
 .modal-content {
     background: white;
     padding: 20px;
-    margin: 15% auto;
-    width: 50%;
-    text-align: center;
+    margin: 10% auto;
+    width: fit-content;
+  
     border-radius: 5px;
 }
 
 .modal button {
     margin-top: 10px;
 }
-
+.container h2{
+    display:flex;
+    justify-content:center;
+}
     </style>
 </head>
 <body>
-
+<div class="container">
+        
+        <?php include 'header.php'; ?>
     <h2>Flight Booking Form</h2>
 
     <form id="bookingForm" action="./db/process_booking.php" method="POST">
@@ -91,15 +101,15 @@ button:hover {
 
         <label for="payment_method">Payment Method:</label>
         <select id="payment_method" name="payment_method" required>
-            <option value="Credit Card">Credit Card</option>
+            <option value="Credit Card">Bitcoin</option>
             <option value="PayPal">PayPal</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-            <option value="Cash">Cash</option>
+            <option value="Apple">Apple</option>
+            
         </select>
 
         <button type="button" onclick="openModal()">Submit Booking</button>
     </form>
-
+</container>
     <!-- Modal -->
     <div id="confirmationModal" class="modal">
         <div class="modal-content">
@@ -140,6 +150,6 @@ function closeModal() {
     document.getElementById("confirmationModal").style.display = "none";
 }
 
-    </script> <!-- JavaScript file -->
+    </script> 
 </body>
 </html>

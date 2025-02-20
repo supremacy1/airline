@@ -90,15 +90,18 @@
         .logo-img{
             width: 40px;
             height: 40px;
+            border-radius: 10px;
         }
         .logo{
             display: flex;
             align-items: center;
             color: #000;
+
         }
         .logo h2{
             margin-left: 10px;
             color: #fff;
+           
         }
 
     </style>
