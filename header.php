@@ -116,7 +116,7 @@
         <button class="menu-button" onclick="toggleMenu()">☰</button>
         <nav>
             <ul id="nav-menu">
-                <li><a href="#home">Home</a></li>
+                <li><a href="index">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="mailto:travelairlines210america@gmail.com">Contact Us</a></li>
             </ul>
