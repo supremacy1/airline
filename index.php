@@ -45,7 +45,7 @@
     </div>
     <section id="introduction">
         <h2>Experience the Sky Like Never Before</h2>
-        <p>At SkyFly Airlines, we are dedicated to providing top-notch travel experiences with comfort, luxury, and affordability. Whether you are traveling for business or leisure, we ensure a seamless journey with world-class service, modern aircraft, and exceptional hospitality. Explore global destinations with ease and confidence.</p>
+        <p>At TRAVEL AIRWAYS Airlines, we are dedicated to providing top-notch travel experiences with comfort, luxury, and affordability. Whether you are traveling for business or leisure, we ensure a seamless journey with world-class service, modern aircraft, and exceptional hospitality. Explore global destinations with ease and confidence.</p>
     </section>
     
     <section id="services">
@@ -67,7 +67,7 @@ class="button" type="submit">Book Now!</a>
     </section>
     
     <footer>
-        <p>&copy; 2025 SkyFly Airlines. All rights reserved.</p>
+        <p>&copy; 2025 TRAVEL AIRWAYS Airlines. All rights reserved.</p>
     </footer>
     
    

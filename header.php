@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyFly Airlines</title>
+    <title>TRAVEL AIRWAYS Airlines</title>
     <link rel="stylesheet" href="styles.css">
     <script>
         function toggleMenu() {
@@ -110,8 +110,8 @@
     <div class="header">
         <div class="logo">
 
-            <img src="./images/logo.jpg" alt="SkyFly Airlines Logo" class="logo-img">
-            <h2>SkyFly Airlines</h2>
+            <img src="./images/logo.jpg" alt="TRAVEL AIRWAYS Airlines Logo" class="logo-img">
+            <h2>TRAVEL AIRWAYS </h2>
         </div>
         <button class="menu-button" onclick="toggleMenu()">☰</button>
         <nav>

@@ -3,6 +3,9 @@ session_start();
 require_once "db.php"; 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+// require_once '../PHPMailer/PHPMailer.php';
+// require_once '../PHPMailer/Exception.php';
+// require_once '../PHPMailer/SMTP.php';
 require '../vendor/autoload.php';
 
 // Retrieve form data
@@ -31,7 +34,7 @@ if (!$user) {
     ";
 } else {
     // Proceed with sending email
-    $company_email = "debysfoundation@gmail.com";
+    $company_email = "andrewohejiedogbu@gmail.com";
     $message = "
         <h2>New Flight Booking Request</h2>
         <p><strong>Name:</strong> $name</p>
@@ -46,15 +49,17 @@ if (!$user) {
 
     $mail = new PHPMailer(true);
     try {
+//         $mail->SMTPDebug = 2; // or 3 for more detail
+// $mail->Debugoutput = 'html';
         $mail->isSMTP();
-        $mail->Host = "debysfoundation.org.ng";  
+        $mail->Host = "delightskcompanyltd.com";  
         $mail->SMTPAuth = true;
-        $mail->Username = "support@debysfoundation.org.ng";  
-        $mail->Password = "andybestdigita@1";  
+        $mail->Username = "info@delightskcompanyltd.com";  
+        $mail->Password = "andybest@1";  
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
-        $mail->setFrom("no-reply@debysfoundation.org.ng", "Flight Booking System");
+        $mail->setFrom("info@delightskcompanyltd.com", "Flight Booking System");
         $mail->addAddress($company_email, "Flight Company");
         $mail->Subject = "New Flight Booking";
         $mail->isHTML(true);
@@ -70,8 +75,14 @@ if (!$user) {
                 });
             </script>
         ";
-    } catch (Exception $e) {
+//     } catch (Exception $e) {
+//         echo "<script>alert('Error sending email: " . $mail->ErrorInfo . "'); window.history.back();</script>";
+//     }
+// }
+   } catch (Exception $e) {
         echo "<script>alert('Error sending email: " . $mail->ErrorInfo . "'); window.history.back();</script>";
+        // Add this for debugging:
+        error_log('Mailer Error: ' . $mail->ErrorInfo);
     }
 }
 ?>
