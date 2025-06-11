@@ -12,16 +12,16 @@ require '../vendor/autoload.php';
 $name = $_POST['name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
-$departure = $_POST['departure'];
+// $departure = $_POST['departure'];
 $destination = $_POST['destination'];
 $departure_date = $_POST['departure_date'];
-$return_date = $_POST['return_date'];
+// $return_date = $_POST['return_date'];
 $payment_method = $_POST['payment_method'];
 
 // Check if email exists in the database
-$stmt = $pdo->prepare("SELECT * FROM airline_companies WHERE email = ?");
-$stmt->execute([$email]);
-$user = $stmt->fetch();
+// $stmt = $pdo->prepare("SELECT * FROM airline_companies WHERE email = ?");
+// $stmt->execute([$email]);
+// $user = $stmt->fetch();
 
 if (!$user) {
     // If email does not exist, show modal
@@ -33,6 +33,9 @@ if (!$user) {
         </script>
     ";
 } else {
+     $stmt = $pdo->prepare("INSERT INTO bookings (name, email, phone, destination, departure_date, payment_method) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$name, $email, $phone, $destination, $departure_date, $payment_method]);
+
     // Proceed with sending email
     $company_email = "andrewohejiedogbu@gmail.com";
     $message = "
@@ -40,13 +43,14 @@ if (!$user) {
         <p><strong>Name:</strong> $name</p>
         <p><strong>Email:</strong> $email</p>
         <p><strong>Phone:</strong> $phone</p>
-        <p><strong>Departure:</strong> $departure</p>
+    
         <p><strong>Destination:</strong> $destination</p>
         <p><strong>Departure Date:</strong> $departure_date</p>
-        <p><strong>Return Date:</strong> $return_date</p>
+       
         <p><strong>Payment Method:</strong> $payment_method</p>
     ";
-
+    // <p><strong>Departure:</strong> $departure</p>
+     // <p><strong>Return Date:</strong> $return_date</p>
     $mail = new PHPMailer(true);
     try {
 //         $mail->SMTPDebug = 2; // or 3 for more detail

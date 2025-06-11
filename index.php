@@ -61,7 +61,7 @@
     
     <section id="booking">
         <h2>Book Your Flight</h2>
-        <a href="airlineregistrationform.php" 
+        <a href="bookingflight.php" 
 class="button" type="submit">Book Now!</a>
         </form>
     </section>

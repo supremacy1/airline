@@ -58,8 +58,29 @@ button:hover {
     padding: 20px;
     margin: 10% auto;
     width: fit-content;
-  
+    color: white;
+    box-shadow: 0 0 10px rgba(14, 7, 112, 0.1);
     border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-content::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* dark overlay */
+        url('./images/airline.gif') center/100% no-repeat;
+    z-index: 1;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.modal-content > * {
+    position: relative;
+    z-index: 2;
 }
 
 .modal button {
@@ -87,21 +108,21 @@ button:hover {
         <label for="phone">Phone Number:</label>
         <input type="text" id="phone" name="phone" required>
 
-        <label for="departure">Departure:</label>
-        <input type="text" id="departure" name="departure" required>
+        <!-- <label for="departure">Departure:</label>
+        <input type="text" id="departure" name="departure" required> -->
 
-        <label for="destination">Destination:</label>
+        <label for="destination">Address:</label>
         <input type="text" id="destination" name="destination" required>
 
-        <label for="departure_date">Departure Date:</label>
+        <label for="departure_date">Date of Birth:</label>
         <input type="date" id="departure_date" name="departure_date" required>
 
-        <label for="return_date">Return Date:</label>
-        <input type="date" id="return_date" name="return_date">
+        <!-- <label for="return_date">Return Date:</label>
+        <input type="date" id="return_date" name="return_date"> -->
 
         <label for="payment_method">Payment Method:</label>
         <select id="payment_method" name="payment_method" required>
-            <option value="Credit Card">Bitcoin</option>
+            <option value="Bitcoin">Bitcoin</option>
             <option value="PayPal">PayPal</option>
             <option value="Apple">Apple</option>
             
@@ -125,27 +146,28 @@ button:hover {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
-    let departure = document.getElementById("departure").value;
+    // let departure = document.getElementById("departure").value;
     let destination = document.getElementById("destination").value;
     let departureDate = document.getElementById("departure_date").value;
-    let returnDate = document.getElementById("return_date").value || "N/A";
+    // let returnDate = document.getElementById("return_date").value || "N/A";
     let paymentMethod = document.getElementById("payment_method").value;
 
     let modalDetails = `
         <strong>Name:</strong> ${name} <br>
         <strong>Email:</strong> ${email} <br>
         <strong>Phone:</strong> ${phone} <br>
-        <strong>Departure:</strong> ${departure} <br>
+       
         <strong>Destination:</strong> ${destination} <br>
         <strong>Departure Date:</strong> ${departureDate} <br>
-        <strong>Return Date:</strong> ${returnDate} <br>
+        
         <strong>Payment Method:</strong> ${paymentMethod}
     `;
 
     document.getElementById("modalDetails").innerHTML = modalDetails;
     document.getElementById("confirmationModal").style.display = "block";
 }
-
+ // <strong>Departure:</strong> ${departure} <br>
+ // <strong>Return Date:</strong> ${returnDate} <br>
 function closeModal() {
     document.getElementById("confirmationModal").style.display = "none";
 }
