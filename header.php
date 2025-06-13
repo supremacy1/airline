@@ -110,14 +110,14 @@
     <div class="header">
         <div class="logo">
 
-            <img src="./images/logo.jpg" alt="TRAVEL AIRWAYS Airlines Logo" class="logo-img">
-            <h2>TRAVEL AIRWAYS </h2>
+            <img src="./images/logo.png" alt="TRAVEL AIRWAYS Airlines Logo" class="logo-img">
+            <h2>Busflight Airways </h2>
         </div>
         <button class="menu-button" onclick="toggleMenu()">☰</button>
         <nav>
             <ul id="nav-menu">
                 <li><a href="index">Home</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="index">Services</a></li>
                 <li><a href="mailto:travelairlines210america@gmail.com">Contact Us</a></li>
             </ul>
         </nav>

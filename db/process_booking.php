@@ -12,18 +12,16 @@ require '../vendor/autoload.php';
 $name = $_POST['name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
-// $departure = $_POST['departure'];
+
 $destination = $_POST['destination'];
 $departure_date = $_POST['departure_date'];
-// $return_date = $_POST['return_date'];
+
 $payment_method = $_POST['payment_method'];
 
-// Check if email exists in the database
-// $stmt = $pdo->prepare("SELECT * FROM airline_companies WHERE email = ?");
-// $stmt->execute([$email]);
-// $user = $stmt->fetch();
+
 
 if (!$user) {
+     header('Content-Type: application/json');
     // If email does not exist, show modal
     echo "
         <script>
@@ -43,23 +41,18 @@ if (!$user) {
         <p><strong>Name:</strong> $name</p>
         <p><strong>Email:</strong> $email</p>
         <p><strong>Phone:</strong> $phone</p>
-    
         <p><strong>Destination:</strong> $destination</p>
         <p><strong>Departure Date:</strong> $departure_date</p>
-       
         <p><strong>Payment Method:</strong> $payment_method</p>
     ";
-    // <p><strong>Departure:</strong> $departure</p>
-     // <p><strong>Return Date:</strong> $return_date</p>
+
     $mail = new PHPMailer(true);
     try {
-//         $mail->SMTPDebug = 2; // or 3 for more detail
-// $mail->Debugoutput = 'html';
         $mail->isSMTP();
-        $mail->Host = "delightskcompanyltd.com";  
+        $mail->Host = "delightskcompanyltd.com";
         $mail->SMTPAuth = true;
-        $mail->Username = "info@delightskcompanyltd.com";  
-        $mail->Password = "andybest@1";  
+        $mail->Username = "info@delightskcompanyltd.com";
+        $mail->Password = "andybest@1";
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
@@ -68,9 +61,31 @@ if (!$user) {
         $mail->Subject = "New Flight Booking";
         $mail->isHTML(true);
         $mail->Body = $message;
-
         $mail->send();
-        
+ // Add headers to improve deliverability 
+        $mail->addCustomHeader('X-Mailer', 'PHPMailer');
+        $mail->addCustomHeader('X-Priority', '3'); // Normal priority
+        $mail->addCustomHeader('X-MSMail-Priority', 'Normal');
+        // Send success email to the user
+        $mail->clearAddresses();
+        $mail->addAddress($email, $name);
+        $mail->Subject = "Your Flight Booking Was Successful!";
+        // Add your logo path (must be accessible via URL or use embed)
+        $logoUrl = "./images/logo.png"; // Change to your actual logo URL
+        $userMessage = "
+            <div style='text-align:center;'>
+                <img src='$logoUrl' alt='Company Logo' style='max-width:150px; margin-bottom:20px;'><br>
+                <h2 style='color:#007bff;'>Booking Successful!</h2>
+                <p>Dear $name,</p>
+                <p>Your flight booking request has been received and is being processed.</p>
+                <p>Thank you for choosing our airline!</p>
+                <hr>
+                <p style='font-size:12px;color:#888;'>If you have any questions, reply to this email.</p>
+            </div>
+        ";
+        $mail->Body = $userMessage;
+        $mail->send();
+
         // Show booking success modal
         echo "
             <script>
@@ -79,16 +94,10 @@ if (!$user) {
                 });
             </script>
         ";
-//     } catch (Exception $e) {
-//         echo "<script>alert('Error sending email: " . $mail->ErrorInfo . "'); window.history.back();</script>";
-//     }
-// }
-   } catch (Exception $e) {
+    } catch (Exception $e) {
         echo "<script>alert('Error sending email: " . $mail->ErrorInfo . "'); window.history.back();</script>";
-        // Add this for debugging:
         error_log('Mailer Error: ' . $mail->ErrorInfo);
-    }
-}
+    }}
 ?>
 
 <!DOCTYPE html>
